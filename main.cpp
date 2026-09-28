@@ -15,7 +15,7 @@
 #include "ResponseUnit.h"
 
 // Scenario 1: Chemical Spill & Toxic Hazard Containment
-// Patterns: Factory Method, State, Command, Mediator 4 patterns in one continuous flow
+// Patterns: Factory Method, State, Command, Mediator (4 patterns in one continuous flow)
 void runScenario1_ChemicalSpillContainment() {
 
     std::cout << "SCENARIO 1: Chemical Spill & Toxic Hazard Escalation\n";
@@ -25,7 +25,7 @@ void runScenario1_ChemicalSpillContainment() {
     // 1. Initialize Mediator
     CentralDispatcher centralDispatcher;
 
-    // 2. Factory Method:Instantiate & register collaborating response units
+    // 2. Factory Method: Instantiate & register collaborating response units
     EmergencyUnitFactory unitFactory;
     ResponseUnit* secAlpha=unitFactory.createUnit("SECURITY","SEC-Alpha",&centralDispatcher);
     ResponseUnit* medBravo=unitFactory.createUnit("MEDICAL","MED-Bravo",&centralDispatcher);
@@ -36,36 +36,36 @@ void runScenario1_ChemicalSpillContainment() {
     chemSpill.displayStatus();
 
     // 4. Test Invalid Operation: Attempting to resolve an unconfirmed report
-    std::cout << "\n [Testing Invalid Operation 1: Illegal Early Resolution] \n";
+    std::cout << "\n[Testing Invalid Operation 1: Illegal Early Resolution]\n";
     chemSpill.resolve(); // Handled by ReportedState
 
     // 5. Command Pattern: Invoker queues and dispatches security unit
     IncidentCommanderConsole console;
-    std::cout << "\n [Operator Action: Dispatching Security Recon] \n";
+    std::cout << "\n[Operator Action: Dispatching Security Recon]\n";
     Command* dispatchSec=new DispatchUnitCommand(secAlpha, "Chemistry Complex Lab 3B");
     console.executeCommand(dispatchSec);
 
     // 6. State transition: Incident escalates to ActiveState
-    std::cout << "\n [Incident Verification] \n";
+    std::cout << "\n[Incident Verification]\n";
     chemSpill.escalate();
     chemSpill.displayStatus();
 
     // 7. Mediator Pattern: Security detects vapor; coordinates Medical and Facilities automatically
-    std::cout << "\n [Field Event: Security Discovers Toxic Fumes] \n";
+    std::cout << "\n[Field Event: Security Discovers Toxic Fumes]\n";
     secAlpha->reportStatus("TOXIC_HAZARD","Chemistry Complex Lab 3B");
 
     // 8. Command Pattern: Dispatch facilities containment team
-    std::cout << "\n [Operator Action: Dispatching Facilities Isolation Team] \n";
+    std::cout << "\n[Operator Action: Dispatching Facilities Isolation Team]\n";
     Command* dispatchFac = new DispatchUnitCommand(facCharlie, "Chemistry Complex Lab 3B");
     console.executeCommand(dispatchFac);
 
     // 9. State transition: Resolution after hazard containment
-    std::cout << "\n [Incident Resolution] \n";
+    std::cout << "\n[Incident Resolution]\n";
     chemSpill.resolve();
     chemSpill.displayStatus();
 
     // 10. Test Invalid Operation: Attempting to re-escalate an archived/resolved incident
-    std::cout << "\n [Testing Invalid Operation 2: Illegal Escalation of Closed Case] \n";
+    std::cout << "\n[Testing Invalid Operation 2: Illegal Escalation of Closed Case]\n";
     chemSpill.escalate(); // Handled gracefully by ResolvedState
 
     // Clean up dynamically allocated units owned by this runtime context
@@ -105,27 +105,27 @@ void runScenario2_HostileIntruderLockdown() {
     workflowFacade.initiateCampusLockdown("Engineering Tower B", &intruderIncident);
 
     // Check subsystem status independently
-    std::cout << "[Subsystem Verification] Is Engineering Tower B locked? " <<(accessControl.isLocked("Engineering Tower B")?"YES (LOCKED)":"NO")<< "\n";
+    std::cout << "\n[Subsystem Verification] Is Engineering Tower B locked? " <<(accessControl.isLocked("Engineering Tower B")?"YES (LOCKED)":"NO")<< "\n";
 
     // 4. Command Pattern: Issue public evacuation alert
-    std::cout << "\n [Operator Action: Issue Broad Campus Evacuation Notice] \n";
+    std::cout << "\n[Operator Action: Issue Broad Campus Evacuation Notice]\n";
     Command* alertCmd = new IssueEvacuationAlertCommand(&sirenAdapter, "Engineering Tower B", "IMMEDIATE EVACUATION REQUIRED");
     console.executeCommand(alertCmd);
 
     // 5. Mediator Pattern: Security intercepts intruder and coordinates containment
-    std::cout << "\n [Field Event: Security Engages and Corrals Intruder] \n";
+    std::cout << "\n[Field Event: Security Engages and Corrals Intruder]\n";
     secBravo->reportStatus("HOSTILE_BREACH", "Engineering Tower B - Ground Floor");
 
-    // 6. Facade Pattern:Single-call de-escalation workflow
-    std::cout << "\n [Threat Neutralized: Executing De-escalation Workflow] \n";
+    // 6. Facade Pattern: Single-call de-escalation workflow
+    std::cout << "\n[Threat Neutralized: Executing De-escalation Workflow]\n";
     workflowFacade.resolveEmergency("Engineering Tower B", &intruderIncident);
 
     // Verify independent access control status post-resolution
-    std::cout << "[Subsystem Verification] Is Engineering Tower B locked? " << (accessControl.isLocked("Engineering Tower B") ? "YES (LOCKED)" : "NO (RESTORED)") << "\n";
+    std::cout << "\n[Subsystem Verification] Is Engineering Tower B locked? " << (accessControl.isLocked("Engineering Tower B") ? "YES (LOCKED)" : "NO (RESTORED)") << "\n";
 
     delete secBravo;
 
-    std::cout << "\n[SCENARIO 2 COMPLETE]\n\n";
+    std::cout << "\nSCENARIO 2 COMPLETE\n\n";
 }
 
 int main() {
