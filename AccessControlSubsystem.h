@@ -1,17 +1,17 @@
-#ifndef ACCESSCONTROLSUBSYSTEM_H
-#define ACCESSCONTROLSUBSYSTEM_H
+#ifndef ACCESS_CONTROL_SUBSYSTEM_H
+#define ACCESS_CONTROL_SUBSYSTEM_H
 
 #include <string>
 #include <map>
 using namespace std;
 
 
-class AccessControlSubSystem{
+class AccessControlSubsystem{
     public:
 
         enum AccessLevel { OPEN, RESTRICTED, LOCKED};
-        AccessControlSubSystem();
-        virtual ~AccessControlSubSystem();
+        AccessControlSubsystem();
+        virtual ~AccessControlSubsystem();
 
         bool lockDownBuilding(const string& buildingId);
         bool restricBuilding(const string& buildingId);

@@ -1,10 +1,9 @@
 #include "EmergencyWorkflowFacade.h"
-#include "AccessControlSubsystem.h"
+#include "AccessControlSubsystem.h"      
 #include "NotificationService.h"
 #include "IncidentCommanderConsole.h"
 #include "LockdownAreaCommand.h"
 #include "Incident.h"
-
 #include <iostream>
 
 EmergencyWorkflowFacade::EmergencyWorkflowFacade(AccessControlSubsystem* ac, NotificationService* ns, IncidentCommanderConsole* icc) : accessControl(ac), sirenService(ns), console(icc){}

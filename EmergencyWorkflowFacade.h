@@ -1,6 +1,7 @@
-#ifndef EMERGENCYWORKFLOWFACADE_H
-#define EMERGENCYWORKFLOWFACADE_H
+#ifndef EMERGENCY_WORKFLOW_FACADE_H
+#define EMERGENCY_WORKFLOW_FACADE_H
 #include <string>
+
 using namespace std;
 
 class AccessControlSubsystem;
@@ -15,7 +16,7 @@ class EmergencyWorkflowFacade{
         IncidentCommanderConsole* console;
 
     public:
-        EmergencyWorkflowFacade(AccessControlSubsystem* ac, NotificationService* ns, IncidentCommanderConsole icc);
+        EmergencyWorkflowFacade(AccessControlSubsystem* ac, NotificationService* ns, IncidentCommanderConsole* icc);
         virtual ~EmergencyWorkflowFacade();
 
         void initiateCampusLockdown(const string& buildingId, Incident* incident);

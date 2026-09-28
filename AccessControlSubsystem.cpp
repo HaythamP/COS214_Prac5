@@ -1,11 +1,11 @@
 #include "AccessControlSubsystem.h"
 #include <iostream>
 
-AccessControlSubSystem::AccessControlSubSystem(){}
+AccessControlSubsystem::AccessControlSubsystem(){}
 
-AccessControlSubSystem::~AccessControlSubSystem(){}
+AccessControlSubsystem::~AccessControlSubsystem(){}
 
-string AccessControlSubSystem::levelName(AccessLevel lvl){
+string AccessControlSubsystem::levelName(AccessLevel lvl){
     switch (lvl)
     {
     case LOCKED:
@@ -24,16 +24,16 @@ string AccessControlSubSystem::levelName(AccessLevel lvl){
     }
 }
 
-AccessControlSubSystem::AccessLevel AccessControlSubSystem::getAccessLevel(const string& buildingId) const{
+AccessControlSubsystem::AccessLevel AccessControlSubsystem::getAccessLevel(const string& buildingId) const{
     map<string, AccessLevel>::const_iterator i = buildingAccess.find(buildingId);
     return(i != buildingAccess.end()) ? i->second : OPEN;
 }
 
-bool AccessControlSubSystem::isLocked(const string& buildingId) const{
+bool AccessControlSubsystem::isLocked(const string& buildingId) const{
     return getAccessLevel(buildingId) == LOCKED;
 }
 
-bool AccessControlSubSystem::lockDownBuilding(const string& buildingId){
+bool AccessControlSubsystem::lockDownBuilding(const string& buildingId){
     if (buildingId.empty())
     {
         cout << "[AccessControl] ERROR: Cannot lock a building with no ID. \n";
@@ -52,7 +52,7 @@ bool AccessControlSubSystem::lockDownBuilding(const string& buildingId){
     
 }
 
-bool AccessControlSubSystem::restricBuilding(const string& buildingId){
+bool AccessControlSubsystem::restricBuilding(const string& buildingId){
     if (buildingId.empty())
     {
         cout << "[AccessControl] ERROR: Cannot restrict a building with no ID. \n";
@@ -71,7 +71,7 @@ bool AccessControlSubSystem::restricBuilding(const string& buildingId){
     
 }
 
-bool AccessControlSubSystem::unlockBuilding(const string& buildingId){
+bool AccessControlSubsystem::unlockBuilding(const string& buildingId){
     if (getAccessLevel(buildingId) == OPEN)
     {
         cout << "[AccessControl] " << buildingId << " is already OPEN, no changes were made\n";
@@ -87,7 +87,7 @@ bool AccessControlSubSystem::unlockBuilding(const string& buildingId){
     
 }
 
-void AccessControlSubSystem::printStatus(const string& buildingId) const {
+void AccessControlSubsystem::printStatus(const string& buildingId) const {
     cout << "[AccessControl] " << buildingId << " is currently " << levelName(getAccessLevel(buildingId)) << ".\n";
 }
 

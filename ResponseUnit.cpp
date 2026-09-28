@@ -1,5 +1,5 @@
 #include "ResponseUnit.h"
-#include "DisptacherMediator.h"
+#include "DispatcherMediator.h"
 
 ResponseUnit::ResponseUnit(const std::string& sign, const std::string& t, DispatcherMediator* med):callsign(sign),type(t),mediator(med){}
 ResponseUnit::~ResponseUnit(){}
