@@ -1,0 +1,5 @@
+.git
+.vscode
+*.o
+*.d
+campusguard
